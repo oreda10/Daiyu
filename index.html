@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posting Tracker - Monitoring Dashboard</title>
+    
+    <!-- Google Fonts - Professional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --bg-hover: #1a1a1a;
+            --border-color: #222222;
+            --accent-primary: #ffffff;
+            --accent-success: #00ff41;
+            --accent-error: #ff3b3b;
+            --accent-warning: #ffa500;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --text-tertiary: #555555;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.7);
+            --accent-glow: 0 0 15px rgba(0, 255, 65, 0.3);
+            --overlay-bg: rgba(0, 0, 0, 0.9);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+        
+        /* ========== LOGIN PAGE ========== */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 65, 0.03) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .login-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+        
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-success);
+            box-shadow: var(--accent-glow);
+            background: var(--bg-hover);
+        }
+        
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
+        
+        .role-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+        }
+        
+        .role-option {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .role-option:hover {
+            background: var(--bg-hover);
+        }
+        
+        .role-option.active {
+            background: var(--accent-success);
+            color: var(--bg-primary);
+            border-color: var(--accent-success);
+            box-shadow: var(--accent-glow);
+            font-weight: 600;
+        }
+        
+        .login-btn {
+            background: var(--accent-success);
+            color: var(--bg-primary);
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .login-btn:hover {
+            background: #00cc33;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .login-btn:active {
+            transform: translateY(0);
+        }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-tertiary);
+            font-size: 0.8rem;
+        }
+        
+        .error-message {
+            background: rgba(255, 59, 59, 0.1);
+            border: 1px solid var(--accent-error);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: var(--accent-error);
+            font-size: 0.8rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        /* ========== DASHBOARD ========== */
+        .dashboard-container {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .dashboard-container.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.75rem;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Header - Compact with Icons */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            gap: 0.75rem;
+        }
+        
+        h1 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            font-weight: 400;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+        }
+        
+        .role-badge {
+            background: var(--accent-warning);
+            color: var(--bg-primary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .role-badge.admin {
+            background: var(--accent-success);
+        }
+        
+        .icon-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.4rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .icon-btn:hover {
+            border-color: var(--text-secondary);
+            background: var(--bg-hover);
+        }
+        
+        .icon-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .logout-btn {
+            background: rgba(255, 59, 59, 0.1);
+            border-color: var(--accent-error);
+            color: var(--accent-error);
+        }
+        
+        .logout-btn:hover {
+            background: var(--accent-error);
+            color: var(--bg-primary);
+        }
+        
+        /* Stats Grid - 2x2 on Mobile, 4x1 on Desktop */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+            }
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .stat-card {
+                padding: 1.25rem;
+            }
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--text-tertiary);
+        }
+        
+        .stat-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        
+        @media (min-width: 768px) {
+            .stat-label {
+                font-size: 0.75rem;
+                margin-bottom: 0.75rem;
+            }
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--text-primary);
+        }
+        
+        @media (min-width: 768px) {
+            .stat-value {
+                font-size: 2.5rem;
+            }
+        }
+        
+        .stat-card.success .stat-value {
+            color: var(--accent-success);
+        }
+        
+        .stat-card.failed .stat-value {
+            color: var(--accent-error);
+        }
+        
+        /* Filters - Dropdown Period */
+        .filters {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        @media (min-width: 768px) {
+            .filters-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        
+        .filter-label {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        select, input[type="text"], input[type="date"] {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 0.65rem;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+        
+        /* Admin Actions */
+        .admin-actions {
+            display: none;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .admin-actions.show {
+            display: flex;
+        }
+        
+        .admin-actions button {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.45rem 0.75rem;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        
+        .admin-actions button svg {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .admin-actions button:hover {
+            background: var(--bg-hover);
+            border-color: var(--text-secondary);
+        }
+        
+        .btn-delete {
+            background: rgba(255, 59, 59, 0.1) !important;
+            border-color: var(--accent-error) !important;
+            color: var(--accent-error) !important;
+        }
+        
+        .btn-delete:hover {
+            background: var(--accent-error) !important;
+            color: var(--bg-primary) !important;
+        }
+        
+        .btn-refresh {
+            background: var(--text-primary) !important;
+            color: var(--bg-primary) !important;
+            border: none !important;
+        }
+        
+        .btn-refresh:hover {
+            background: var(--text-secondary) !important;
+        }
+        
+        .selected-count {
+            background: var(--accent-success);
+            color: var(--bg-primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 0.3rem;
+        }
+        
+        /* Table Container */
+        .table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 100%;
+        }
+        
+        thead {
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        th {
+            padding: 0.35rem 0.3rem;
+            text-align: left;
+            font-size: 0.55rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+        
+        @media (min-width: 768px) {
+            th {
+                padding: 0.6rem 0.75rem;
+                font-size: 0.7rem;
+            }
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.15s ease;
+        }
+        
+        tbody tr:hover {
+            background: var(--bg-hover);
+        }
+        
+        tbody tr.selected {
+            background: rgba(0, 255, 65, 0.05);
+        }
+        
+        td {
+            padding: 0.35rem 0.3rem;
+            font-size: 0.65rem;
+            vertical-align: middle;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (min-width: 768px) {
+            td {
+                padding: 0.6rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* Produk name - allow horizontal scroll */
+        td.product-name {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: auto;
+            text-overflow: clip;
+        }
+        
+        td.product-name::-webkit-scrollbar {
+            height: 3px;
+        }
+        
+        td.product-name::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+        
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+        
+        .text-small {
+            font-size: 0.7rem;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: var(--accent-success);
+        }
+        
+        /* Status Badge - Original Style */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.45rem;
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        @media (min-width: 768px) {
+            .status-badge {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+            }
+        }
+        
+        .status-success {
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--accent-success);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .status-failed {
+            background: rgba(255, 59, 59, 0.1);
+            color: var(--accent-error);
+            border: 1px solid rgba(255, 59, 59, 0.3);
+        }
+        
+        /* Product URL - Original Style */
+        .product-url {
+            color: var(--text-primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: color 0.2s ease;
+            font-size: 0.65rem;
+        }
+        
+        .product-url:hover {
+            color: var(--accent-success);
+        }
+        
+        .product-url::after {
+            content: '→';
+            font-size: 1em;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .pagination-info {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .pagination-controls button {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .pagination-controls button:hover:not(:disabled) {
+            background: var(--bg-hover);
+            border-color: var(--text-secondary);
+        }
+        
+        .pagination-controls button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--overlay-bg);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .modal-overlay.show {
+            display: flex;
+        }
+        
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            margin-bottom: 1rem;
+        }
+        
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .modal-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .modal-btn.cancel {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .modal-btn.confirm {
+            background: var(--accent-error);
+            color: var(--bg-primary);
+            border-color: var(--accent-error);
+        }
+        
+        .modal-btn.confirm:hover {
+            background: #ff1a1a;
+        }
+        
+        .modal-btn.cancel:hover {
+            background: var(--bg-hover);
+        }
+        
+        /* Loading & Empty States */
+        .loading, .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--text-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1.25rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 767px) {
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .login-card {
+                padding: 1.5rem;
+            }
+            
+            .role-selector {
+                flex-direction: column;
+            }
+            
+            .modal {
+                padding: 1.25rem;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+            
+            th:nth-child(5), td:nth-child(5) {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-header">
+            <h1>Posting Tracker</h1>
+            <p class="login-subtitle">Monitoring Dashboard</p>
+        </div>
+        
+        <div class="login-card">
+            <div class="error-message" id="loginError">
+                Username atau password salah
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Username
+                    </label>
+                    <input type="text" class="form-input" id="username" placeholder="Masukkan username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        Password
+                    </label>
+                    <input type="password" class="form-input" id="password" placeholder="Masukkan password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Peran (Role)
+                    </label>
+                    <div class="role-selector">
+                        <div class="role-option active" data-role="admin">Admin</div>
+                        <div class="role-option" data-role="user">User</div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                    Masuk ke Dashboard
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Gunakan <strong>admin</strong> / <strong>admin123</strong> untuk masuk sebagai Admin</p>
+                <p style="margin-top: 0.5rem;">Gunakan <strong>user</strong> / <strong>user123</strong> untuk masuk sebagai User</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dashboard Container -->
+    <div class="dashboard-container" id="dashboardContainer">
+        <div class="container">
+            <!-- Header with Icons -->
+            <header>
+                <div>
+                    <h1>Posting Tracker</h1>
+                    <p class="subtitle">Monitoring Dashboard</p>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="userName">-</span>
+                        <span id="userRole" class="role-badge">-</span>
+                    </div>
+                    <button class="icon-btn logout-btn" onclick="logout()" title="Logout">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                    </button>
+                    <button class="icon-btn" onclick="refreshData()" title="Refresh">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Stats Grid - 2x2 on Mobile -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Posts</div>
+                    <div class="stat-value" id="totalPosts">0</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-label">Success</div>
+                    <div class="stat-value" id="successPosts">0</div>
+                </div>
+                <div class="stat-card failed">
+                    <div class="stat-label">Failed</div>
+                    <div class="stat-value" id="failedPosts">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Success Rate</div>
+                    <div class="stat-value" id="successRate">0%</div>
+                </div>
+            </div>
+            
+            <!-- Filters with Dropdown Period -->
+            <div class="filters">
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <span class="filter-label">Periode</span>
+                        <select id="periodFilter" onchange="applyFilters()">
+                            <option value="all">Semua</option>
+                            <option value="7">1 Minggu</option>
+                            <option value="14">2 Minggu</option>
+                            <option value="30">1 Bulan</option>
+                            <option value="90">3 Bulan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <span class="filter-label">Status</span>
+                        <select id="statusFilter">
+                            <option value="all">Semua</option>
+                            <option value="success">Success</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <span class="filter-label">Urutkan</span>
+                        <select id="sortFilter">
+                            <option value="date-desc">Terbaru</option>
+                            <option value="date-asc">Terlama</option>
+                            <option value="name-asc">Nama A-Z</option>
+                            <option value="name-desc">Nama Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Admin Actions -->
+                <div class="admin-actions" id="adminActions">
+                    <button onclick="selectAll()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 11 12 14 22 4"></polyline>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+                        Pilih Semua
+                        <span id="selectedCount" class="selected-count" style="display: none;">0</span>
+                    </button>
+                    <button onclick="deselectAll()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        </svg>
+                        Batal Pilih
+                    </button>
+                    <button class="btn-delete" onclick="deleteSelected()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Hapus Terpilih
+                    </button>
+                    <button class="btn-delete" onclick="showResetAllModal()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12a9 9 0 11-9-9"></path>
+                            <path d="M21 12h-8"></path>
+                            <path d="M16 7l5 5-5 5"></path>
+                        </svg>
+                        Reset Semua Data
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Table -->
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <table id="postsTable">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px; display: none;" id="checkboxHeader">
+                                    <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll(this)">
+                                </th>
+                                <th style="width: 50px;">No</th>
+                                <th>Tanggal & Jam</th>
+                                <th>Nama Produk</th>
+                                <th>URL Produk</th>
+                                <th>Website</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody">
+                            <tr>
+                                <td colspan="7">
+                                    <div class="loading">
+                                        <div class="spinner"></div>
+                                        <p>Loading data...</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="pagination-info">
+                    Menampilkan <strong id="showingStart">0</strong>-<strong id="showingEnd">0</strong> dari <strong id="totalData">0</strong> data
+                </div>
+                <div class="pagination-controls">
+                    <button onclick="changePage('prev')" id="prevBtn">‹ Prev</button>
+                    <button onclick="changePage('next')" id="nextBtn">Next ›</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Reset All Data Modal -->
+    <div class="modal-overlay" id="resetModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">⚠️ Reset Semua Data</h3>
+                <p class="modal-subtitle">Aksi ini akan menghapus semua data postingan</p>
+            </div>
+            <div class="modal-content">
+                <p style="color: var(--accent-error); margin-bottom: 0.5rem; font-weight: 500;">PERHATIAN!</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+                    Anda akan menghapus <strong>SEMUA DATA</strong> dari database. 
+                    Tindakan ini biasanya dilakukan setelah proses pembayaran selesai untuk memulai siklus postingan baru.
+                </p>
+                <p style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px;">
+                    Data yang telah dihapus <strong>TIDAK DAPAT</strong> dikembalikan. Pastikan Anda telah melakukan backup jika diperlukan.
+                </p>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="hideResetModal()">Batal</button>
+                <button class="modal-btn confirm" onclick="resetAllData()">Ya, Hapus Semua Data</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // SUPABASE CONFIGURATION
+        const SUPABASE_URL = 'https://cqhznqwezaavrcqhjzjc.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxaHpucXdlemFhdnJjcWhqempjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc4NzM4MTMsImV4cCI6MjA4MzQ0OTgxM30.GP8l8BZoWE6K2NXa8YFdWg5QDoZ2M8Lj36IhfGXIiX4';
+        
+        // USER CREDENTIALS
+        const VALID_USERS = {
+            'admin': { password: 'admin123', role: 'admin', name: 'Boss' },
+            'user': { password: 'user123', role: 'user', name: 'Guest' }
+        };
+        
+        let currentUser = null;
+        let allPosts = [];
+        let filteredPosts = [];
+        let selectedIds = new Set();
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        
+        // ========== LOGIN FUNCTIONS ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            const savedUser = localStorage.getItem('postingTrackerUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showDashboard();
+            }
+            
+            // Role selector functionality
+            document.querySelectorAll('.role-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Login form submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleLogin();
+            });
+            
+            // Enter key support
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleLogin();
+                }
+            });
+        });
+        
+        function handleLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const selectedRole = document.querySelector('.role-option.active').dataset.role;
+            
+            const errorElement = document.getElementById('loginError');
+            
+            // Basic validation
+            if (!username || !password) {
+                errorElement.textContent = 'Username dan password harus diisi';
+                errorElement.classList.add('show');
+                return;
+            }
+            
+            // Check credentials
+            if (VALID_USERS[username] && VALID_USERS[username].password === password) {
+                const userRole = VALID_USERS[username].role;
+                
+                // Check if selected role matches user's actual role
+                if (selectedRole !== userRole) {
+                    errorElement.textContent = `Anda login sebagai ${username}, bukan ${selectedRole}`;
+                    errorElement.classList.add('show');
+                    return;
+                }
+                
+                // Login successful
+                currentUser = {
+                    username: username,
+                    role: userRole,
+                    name: VALID_USERS[username].name
+                };
+                
+                // Save to localStorage
+                localStorage.setItem('postingTrackerUser', JSON.stringify(currentUser));
+                
+                // Show dashboard
+                showDashboard();
+            } else {
+                errorElement.textContent = 'Username atau password salah';
+                errorElement.classList.add('show');
+            }
+        }
+        
+        function showDashboard() {
+            // Hide login, show dashboard with animation
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('dashboardContainer').classList.add('show');
+            
+            // Set user info
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userRole').textContent = currentUser.role.toUpperCase();
+            
+            // Show/hide admin features
+            if (currentUser.role === 'admin') {
+                document.getElementById('adminActions').classList.add('show');
+                document.getElementById('checkboxHeader').style.display = 'table-cell';
+                document.getElementById('userRole').classList.add('admin');
+            } else {
+                document.getElementById('adminActions').classList.remove('show');
+                document.getElementById('checkboxHeader').style.display = 'none';
+            }
+            
+            // Load data
+            fetchPosts();
+        }
+        
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                localStorage.removeItem('postingTrackerUser');
+                currentUser = null;
+                document.getElementById('dashboardContainer').classList.remove('show');
+                document.getElementById('loginContainer').style.display = 'flex';
+                
+                // Reset login form
+                document.getElementById('loginForm').reset();
+                document.querySelector('.role-option').classList.add('active');
+                document.querySelector('.role-option:nth-child(2)').classList.remove('active');
+                document.getElementById('loginError').classList.remove('show');
+            }
+        }
+        
+        // ========== DASHBOARD FUNCTIONS ==========
+        // Fetch data dari Supabase
+        async function fetchPosts() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/product_posts?select=*&order=posted_at.desc`, {
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                allPosts = await response.json();
+                updateStats();
+                applyFilters();
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+                document.getElementById('postsTableBody').innerHTML = `
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <div class="empty-icon">⚠️</div>
+                                <h3>Gagal memuat data</h3>
+                                <p style="margin-top: 0.75rem;">${error.message}</p>
+                                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-tertiary);">
+                                    Pastikan Supabase credentials sudah benar dan table product_posts sudah dibuat
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+        
+        // Update statistik
+        function updateStats() {
+            const total = allPosts.length;
+            const success = allPosts.filter(p => p.status === 'success').length;
+            const failed = total - success;
+            const successRate = total > 0 ? ((success / total) * 100).toFixed(1) : 0;
+            
+            document.getElementById('totalPosts').textContent = total;
+            document.getElementById('successPosts').textContent = success;
+            document.getElementById('failedPosts').textContent = failed;
+            document.getElementById('successRate').textContent = successRate + '%';
+        }
+        
+        // Apply filters
+        function applyFilters() {
+            const periodFilter = document.getElementById('periodFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const sortFilter = document.getElementById('sortFilter').value;
+            
+            let filtered = [...allPosts];
+            
+            // Period filter
+            if (periodFilter !== 'all') {
+                const cutoffDate = new Date();
+                cutoffDate.setDate(cutoffDate.getDate() - parseInt(periodFilter));
+                filtered = filtered.filter(p => new Date(p.posted_at) >= cutoffDate);
+            }
+            
+            // Status filter
+            if (statusFilter !== 'all') {
+                filtered = filtered.filter(p => p.status === statusFilter);
+            }
+            
+            // Sort
+            filtered = sortPosts(filtered, sortFilter);
+            
+            filteredPosts = filtered;
+            currentPage = 1;
+            renderTable();
+        }
+        
+        // Sort posts
+        function sortPosts(posts, sortType) {
+            const sorted = [...posts];
+            
+            switch(sortType) {
+                case 'date-desc':
+                    return sorted.sort((a, b) => new Date(b.posted_at) - new Date(a.posted_at));
+                case 'date-asc':
+                    return sorted.sort((a, b) => new Date(a.posted_at) - new Date(b.posted_at));
+                case 'name-asc':
+                    return sorted.sort((a, b) => a.product_name.localeCompare(b.product_name));
+                case 'name-desc':
+                    return sorted.sort((a, b) => b.product_name.localeCompare(a.product_name));
+                default:
+                    return sorted;
+            }
+        }
+        
+        // Pagination
+        function changePage(direction) {
+            const totalPages = Math.ceil(filteredPosts.length / itemsPerPage);
+            
+            if (direction === 'prev' && currentPage > 1) {
+                currentPage--;
+            } else if (direction === 'next' && currentPage < totalPages) {
+                currentPage++;
+            }
+            
+            renderTable();
+        }
+        
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById('postsTableBody');
+            
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
+            const totalPages = Math.ceil(filteredPosts.length / itemsPerPage);
+            
+            // Update pagination info
+            document.getElementById('showingStart').textContent = filteredPosts.length > 0 ? startIndex + 1 : 0;
+            document.getElementById('showingEnd').textContent = Math.min(endIndex, filteredPosts.length);
+            document.getElementById('totalData').textContent = filteredPosts.length;
+            
+            // Update pagination buttons
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
+            
+            if (paginatedPosts.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <div class="empty-icon">📭</div>
+                                <h3>Belum ada data</h3>
+                                <p style="margin-top: 0.75rem;">
+                                    Data posting akan muncul di sini setelah produk berhasil diposting
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = paginatedPosts.map((post, index) => {
+                const globalIndex = startIndex + index;
+                const date = new Date(post.posted_at);
+                
+                // Format tanggal singkat: 09/Jan
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = date.toLocaleDateString('id-ID', { month: 'short' }).replace('.', '');
+                const formattedDate = `${day}/${month}`;
+                
+                // Format jam singkat: 14:30
+                const formattedTime = date.toLocaleTimeString('id-ID', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const statusBadge = post.status === 'success' 
+                    ? '<span class="status-badge status-success">✓ Success</span>'
+                    : '<span class="status-badge status-failed">✗ Failed</span>';
+                
+                const productUrl = post.product_url 
+                    ? `<a href="${post.product_url}" target="_blank" class="product-url">Lihat</a>`
+                    : '<span class="text-secondary">-</span>';
+                
+                const websiteUrl = post.website_url || '-';
+                
+                const checkboxCol = currentUser.role === 'admin' ? 
+                    `<td style="display: table-cell;"><input type="checkbox" class="row-checkbox" data-id="${post.id}" ${selectedIds.has(post.id) ? 'checked' : ''} onchange="handleRowSelect(this, ${post.id})"></td>` : 
+                    '';
+                
+                const rowClass = selectedIds.has(post.id) ? 'selected' : '';
+                
+                return `
+                    <tr class="${rowClass}">
+                        ${checkboxCol}
+                        <td class="text-secondary font-mono" style="font-size: 0.6rem;">${(globalIndex + 1).toString().padStart(2, '0')}</td>
+                        <td>
+                            <div style="font-size: 0.6rem; line-height: 1.3;">${formattedDate}</div>
+                            <div class="text-secondary font-mono" style="font-size: 0.55rem; line-height: 1.2;">${formattedTime}</div>
+                        </td>
+                        <td class="product-name" style="font-weight: 500; font-size: 0.65rem;">${post.product_name}</td>
+                        <td>${productUrl}</td>
+                        <td class="text-secondary" style="font-size: 0.6rem;">${websiteUrl}</td>
+                        <td>${statusBadge}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        // Checkbox handling
+        function handleRowSelect(checkbox, id) {
+            const row = checkbox.closest('tr');
+            if (checkbox.checked) {
+                selectedIds.add(id);
+                row.classList.add('selected');
+            } else {
+                selectedIds.delete(id);
+                row.classList.remove('selected');
+            }
+            updateSelectedCount();
+        }
+        
+        function toggleSelectAll(checkbox) {
+            const checkboxes = document.querySelectorAll('.row-checkbox');
+            checkboxes.forEach(cb => {
+                cb.checked = checkbox.checked;
+                const id = parseInt(cb.dataset.id);
+                const row = cb.closest('tr');
+                if (checkbox.checked) {
+                    selectedIds.add(id);
+                    row.classList.add('selected');
+                } else {
+                    selectedIds.delete(id);
+                    row.classList.remove('selected');
+                }
+            });
+            updateSelectedCount();
+        }
+        
+        function selectAll() {
+            const checkboxes = document.querySelectorAll('.row-checkbox');
+            checkboxes.forEach(cb => {
+                cb.checked = true;
+                const id = parseInt(cb.dataset.id);
+                const row = cb.closest('tr');
+                selectedIds.add(id);
+                row.classList.add('selected');
+            });
+            document.getElementById('selectAllCheckbox').checked = true;
+            updateSelectedCount();
+        }
+        
+        function deselectAll() {
+            selectedIds.clear();
+            document.querySelectorAll('.row-checkbox').forEach(cb => {
+                cb.checked = false;
+                cb.closest('tr').classList.remove('selected');
+            });
+            document.getElementById('selectAllCheckbox').checked = false;
+            updateSelectedCount();
+        }
+        
+        function updateSelectedCount() {
+            const countBadge = document.getElementById('selectedCount');
+            if (selectedIds.size > 0) {
+                countBadge.textContent = selectedIds.size;
+                countBadge.style.display = 'inline-block';
+            } else {
+                countBadge.style.display = 'none';
+            }
+        }
+        
+        // Delete selected
+        async function deleteSelected() {
+            if (selectedIds.size === 0) {
+                alert('Pilih data yang ingin dihapus terlebih dahulu');
+                return;
+            }
+            
+            if (!confirm(`Yakin ingin menghapus ${selectedIds.size} data terpilih?\n\nData yang dihapus tidak dapat dikembalikan.`)) {
+                return;
+            }
+            
+            try {
+                const deletePromises = Array.from(selectedIds).map(id => 
+                    fetch(`${SUPABASE_URL}/rest/v1/product_posts?id=eq.${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        }
+                    })
+                );
+                
+                await Promise.all(deletePromises);
+                
+                selectedIds.clear();
+                updateSelectedCount();
+                document.getElementById('selectAllCheckbox').checked = false;
+                
+                alert('✅ Data berhasil dihapus!');
+                refreshData();
+            } catch (error) {
+                console.error('Error deleting posts:', error);
+                alert('❌ Gagal menghapus data: ' + error.message);
+            }
+        }
+        
+        // Reset all data (Admin only - after payment)
+        function showResetAllModal() {
+            if (currentUser.role !== 'admin') {
+                alert('Hanya admin yang dapat melakukan reset data');
+                return;
+            }
+            
+            document.getElementById('resetModal').classList.add('show');
+        }
+        
+        function hideResetModal() {
+            document.getElementById('resetModal').classList.remove('show');
+        }
+        
+        async function resetAllData() {
+            try {
+                // Delete all posts
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/product_posts`, {
+                    method: 'DELETE',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Prefer': 'return=minimal'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                hideResetModal();
+                alert('✅ Semua data berhasil direset! Dashboard siap untuk postingan baru.');
+                refreshData();
+            } catch (error) {
+                console.error('Error resetting data:', error);
+                alert('❌ Gagal mereset data: ' + error.message);
+            }
+        }
+        
+        // Refresh data
+        function refreshData() {
+            document.getElementById('postsTableBody').innerHTML = `
+                <tr>
+                    <td colspan="7">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <p>Refreshing...</p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            fetchPosts();
+        }
+        
+        // Event listeners
+        document.getElementById('statusFilter').addEventListener('change', applyFilters);
+        document.getElementById('sortFilter').addEventListener('change', applyFilters);
+        
+        // Auto-refresh setiap 30 detik
+        setInterval(fetchPosts, 30000);
+    </script>
+</body>
+</html>
