@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posting Tracker - Monitoring Dashboard</title>
+    <title>DAIYU MANAGEMENT - Monitoring Dashboard</title>
     
-    <!-- Google Fonts - Professional -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -52,6 +52,7 @@
         .login-container {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             min-height: 100vh;
             padding: 1.5rem;
             position: relative;
@@ -73,13 +74,13 @@
         
         .login-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             position: relative;
             z-index: 1;
         }
         
         .login-header h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: -0.02em;
             margin-bottom: 0.25rem;
@@ -91,16 +92,16 @@
         
         .login-subtitle {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 400;
         }
         
         .login-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 400px;
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-width: 380px;
             width: 100%;
             margin: 0 auto;
             position: relative;
@@ -112,22 +113,22 @@
         .login-form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.25rem;
         }
         
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
         
         .form-label {
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
         
         .form-input {
@@ -135,11 +136,11 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 0.85rem 1rem;
-            border-radius: 10px;
+            padding: 0.75rem;
+            border-radius: 8px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
         }
         
         .form-input:focus {
@@ -153,34 +154,36 @@
             color: var(--text-tertiary);
         }
         
-        .role-selector {
+        /* Role selector - compact horizontal */
+        .role-selector-compact {
             display: flex;
             gap: 0.5rem;
-            margin-top: 0.25rem;
-        }
-        
-        .role-option {
-            flex: 1;
-            text-align: center;
-            padding: 0.75rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.8rem;
-            font-weight: 500;
+            padding: 0.25rem;
         }
         
-        .role-option:hover {
+        .role-option-compact {
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem 0.4rem;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        
+        .role-option-compact:hover {
             background: var(--bg-hover);
         }
         
-        .role-option.active {
+        .role-option-compact.active {
             background: var(--accent-success);
             color: var(--bg-primary);
-            border-color: var(--accent-success);
-            box-shadow: var(--accent-glow);
             font-weight: 600;
         }
         
@@ -188,20 +191,20 @@
             background: var(--accent-success);
             color: var(--bg-primary);
             border: none;
-            padding: 1rem;
-            border-radius: 10px;
+            padding: 0.85rem;
+            border-radius: 8px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            margin-top: 0.25rem;
+            letter-spacing: 0.3px;
         }
         
         .login-btn:hover {
             background: #00cc33;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
         
@@ -211,19 +214,21 @@
         
         .login-footer {
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             color: var(--text-tertiary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            line-height: 1.4;
         }
         
         .error-message {
             background: rgba(255, 59, 59, 0.1);
             border: 1px solid var(--accent-error);
-            border-radius: 8px;
-            padding: 0.75rem;
+            border-radius: 6px;
+            padding: 0.6rem;
             color: var(--accent-error);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-align: center;
+            margin-bottom: 1rem;
             display: none;
         }
         
@@ -236,7 +241,7 @@
             display: none;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
         
         .dashboard-container.show {
@@ -253,11 +258,11 @@
         
         @media (min-width: 768px) {
             .container {
-                padding: 1.5rem;
+                padding: 1.25rem;
             }
         }
         
-        /* Header - Compact with Icons */
+        /* Header */
         header {
             display: flex;
             justify-content: space-between;
@@ -277,7 +282,7 @@
         
         @media (min-width: 768px) {
             h1 {
-                font-size: 1.75rem;
+                font-size: 1.5rem;
             }
         }
         
@@ -318,13 +323,13 @@
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-secondary);
-            padding: 0.4rem;
+            padding: 0.35rem;
             border-radius: 6px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
         
         .icon-btn:hover {
@@ -333,8 +338,8 @@
         }
         
         .icon-btn svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
         }
         
         .logout-btn {
@@ -348,7 +353,7 @@
             color: var(--bg-primary);
         }
         
-        /* Stats Grid - 2x2 on Mobile, 4x1 on Desktop */
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -359,26 +364,20 @@
         @media (min-width: 768px) {
             .stats-grid {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 1rem;
+                gap: 0.75rem;
             }
         }
         
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 0.75rem;
-            transition: all 0.2s ease;
-        }
-        
-        @media (min-width: 768px) {
-            .stat-card {
-                padding: 1.25rem;
-            }
+            transition: all 0.15s ease;
         }
         
         .stat-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
             box-shadow: var(--shadow-md);
             border-color: var(--text-tertiary);
         }
@@ -389,19 +388,12 @@
             letter-spacing: 0.05em;
             color: var(--text-secondary);
             font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-        
-        @media (min-width: 768px) {
-            .stat-label {
-                font-size: 0.75rem;
-                margin-bottom: 0.75rem;
-            }
+            margin-bottom: 0.3rem;
         }
         
         .stat-value {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             line-height: 1;
             color: var(--text-primary);
@@ -409,7 +401,7 @@
         
         @media (min-width: 768px) {
             .stat-value {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
         }
         
@@ -421,11 +413,11 @@
             color: var(--accent-error);
         }
         
-        /* Filters - Dropdown Period */
+        /* Filters */
         .filters {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 0.75rem;
             margin-bottom: 1rem;
         }
@@ -437,23 +429,16 @@
             margin-bottom: 0.75rem;
         }
         
-        @media (min-width: 768px) {
-            .filters-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
         .filter-group {
             display: flex;
             flex-direction: column;
-            gap: 0.35rem;
+            gap: 0.3rem;
         }
         
         .filter-label {
             color: var(--text-secondary);
             font-size: 0.7rem;
             font-weight: 500;
-            white-space: nowrap;
         }
         
         select, input[type="text"], input[type="date"] {
@@ -461,17 +446,16 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 0.5rem 0.65rem;
-            border-radius: 8px;
+            padding: 0.45rem 0.6rem;
+            border-radius: 6px;
             font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
         
         select:focus, input:focus {
             outline: none;
             border-color: var(--text-primary);
-            background: var(--bg-primary);
         }
         
         /* Admin Actions */
@@ -491,21 +475,21 @@
             background: var(--bg-secondary);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
-            padding: 0.45rem 0.75rem;
-            border-radius: 8px;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
+            gap: 0.3rem;
         }
         
         .admin-actions button svg {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
         }
         
         .admin-actions button:hover {
@@ -524,22 +508,12 @@
             color: var(--bg-primary) !important;
         }
         
-        .btn-refresh {
-            background: var(--text-primary) !important;
-            color: var(--bg-primary) !important;
-            border: none !important;
-        }
-        
-        .btn-refresh:hover {
-            background: var(--text-secondary) !important;
-        }
-        
         .selected-count {
             background: var(--accent-success);
             color: var(--bg-primary);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.65rem;
             font-weight: 600;
             display: inline-block;
             margin-left: 0.3rem;
@@ -549,7 +523,7 @@
         .table-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             margin-bottom: 1rem;
         }
@@ -563,6 +537,7 @@
             width: 100%;
             border-collapse: collapse;
             min-width: 100%;
+            table-layout: fixed;
         }
         
         thead {
@@ -573,27 +548,38 @@
         }
         
         th {
-            padding: 0.35rem 0.3rem;
+            padding: 0.5rem 0.4rem;
             text-align: left;
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.02em;
             color: var(--text-secondary);
             border-bottom: 1px solid var(--border-color);
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+        
+        /* Kolom yang diperkecil */
+        th:nth-child(1) { width: 40px; } /* Checkbox */
+        th:nth-child(2) { width: 50px; } /* No */
+        th:nth-child(3) { width: 100px; } /* Tanggal */
+        th:nth-child(4) { width: 220px; } /* Nama Produk - Diperkecil */
+        th:nth-child(5) { width: 120px; } /* URL Produk */
+        th:nth-child(6) { width: 120px; } /* Website */
+        th:nth-child(7) { width: 90px; } /* Status */
         
         @media (min-width: 768px) {
             th {
-                padding: 0.6rem 0.75rem;
-                font-size: 0.7rem;
+                padding: 0.5rem 0.6rem;
+                font-size: 0.65rem;
             }
         }
         
         tbody tr {
             border-bottom: 1px solid var(--border-color);
-            transition: background 0.15s ease;
+            transition: background 0.1s ease;
         }
         
         tbody tr:hover {
@@ -605,44 +591,50 @@
         }
         
         td {
-            padding: 0.35rem 0.3rem;
-            font-size: 0.65rem;
+            padding: 0.4rem 0.4rem;
+            font-size: 0.7rem;
             vertical-align: middle;
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
         
-        @media (min-width: 768px) {
-            td {
-                padding: 0.6rem 0.75rem;
-                font-size: 0.75rem;
-            }
-        }
-        
-        /* Produk name - allow horizontal scroll */
+        /* Nama produk dengan truncation */
         td.product-name {
             max-width: 200px;
             white-space: nowrap;
-            overflow: auto;
-            text-overflow: clip;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: default;
+            font-size: 0.7rem;
         }
         
-        td.product-name::-webkit-scrollbar {
-            height: 3px;
+        td.product-name:hover {
+            position: relative;
+            z-index: 5;
+            background: var(--bg-hover);
         }
         
-        td.product-name::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 2px;
+        td.product-name:hover::after {
+            content: attr(data-fullname);
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            border-radius: 6px;
+            z-index: 100;
+            white-space: normal;
+            width: 300px;
+            max-width: 300px;
+            word-wrap: break-word;
+            box-shadow: var(--shadow-lg);
+            font-size: 0.75rem;
         }
         
         .text-secondary {
             color: var(--text-secondary);
-        }
-        
-        .text-small {
-            font-size: 0.7rem;
         }
         
         .font-mono {
@@ -650,28 +642,21 @@
         }
         
         input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             cursor: pointer;
             accent-color: var(--accent-success);
         }
         
-        /* Status Badge - Original Style */
+        /* Status Badge */
         .status-badge {
             display: inline-flex;
             align-items: center;
-            padding: 0.25rem 0.45rem;
+            padding: 0.2rem 0.4rem;
             border-radius: 4px;
             font-size: 0.6rem;
             font-weight: 600;
             white-space: nowrap;
-        }
-        
-        @media (min-width: 768px) {
-            .status-badge {
-                padding: 0.3rem 0.6rem;
-                font-size: 0.7rem;
-            }
         }
         
         .status-success {
@@ -686,60 +671,63 @@
             border: 1px solid rgba(255, 59, 59, 0.3);
         }
         
-        /* Product URL - Original Style */
+        /* Product URL */
         .product-url {
             color: var(--text-primary);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.25rem;
-            transition: color 0.2s ease;
-            font-size: 0.65rem;
+            transition: color 0.15s ease;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
         
         .product-url:hover {
             color: var(--accent-success);
+            border-color: var(--accent-success);
+            background: var(--bg-hover);
         }
         
-        .product-url::after {
-            content: '→';
-            font-size: 1em;
-        }
-        
-        /* Pagination */
+        /* Pagination - Diperkecil */
         .pagination {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem;
+            padding: 0.6rem;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            gap: 0.75rem;
-            flex-wrap: wrap;
+            border-radius: 8px;
+            gap: 0.5rem;
         }
         
         .pagination-info {
             color: var(--text-secondary);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
         
         .pagination-controls {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
         
+        /* Tombol pagination yang lebih kecil */
         .pagination-controls button {
             background: var(--bg-secondary);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
+            height: 28px;
+            min-width: 60px;
         }
         
         .pagination-controls button:hover:not(:disabled) {
@@ -774,18 +762,18 @@
         .modal {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.5rem;
-            max-width: 400px;
+            border-radius: 12px;
+            padding: 1.25rem;
+            max-width: 380px;
             width: 100%;
             box-shadow: var(--shadow-lg);
-            animation: modalSlideIn 0.3s ease;
+            animation: modalSlideIn 0.2s ease;
         }
         
         @keyframes modalSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -798,34 +786,34 @@
         }
         
         .modal-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.25rem;
         }
         
         .modal-subtitle {
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
         
         .modal-content {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
         
         .modal-actions {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
         
         .modal-btn {
             flex: 1;
-            padding: 0.75rem;
-            border-radius: 8px;
+            padding: 0.6rem;
+            border-radius: 6px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             border: 1px solid var(--border-color);
         }
         
@@ -851,18 +839,18 @@
         /* Loading & Empty States */
         .loading, .empty-state {
             text-align: center;
-            padding: 3rem 1.5rem;
+            padding: 2rem 1rem;
             color: var(--text-secondary);
         }
         
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--border-color);
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--border-color);
             border-top-color: var(--text-primary);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin: 0 auto 1.25rem;
+            margin: 0 auto 1rem;
         }
         
         @keyframes spin {
@@ -870,8 +858,8 @@
         }
         
         .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
             opacity: 0.3;
         }
         
@@ -882,23 +870,30 @@
             }
             
             .login-card {
-                padding: 1.5rem;
-            }
-            
-            .role-selector {
-                flex-direction: column;
-            }
-            
-            .modal {
                 padding: 1.25rem;
             }
             
-            .modal-actions {
-                flex-direction: column;
+            .role-selector-compact {
+                flex-direction: row;
+            }
+            
+            .modal {
+                padding: 1rem;
             }
             
             th:nth-child(5), td:nth-child(5) {
                 display: none;
+            }
+            
+            /* Kolom mobile */
+            th:nth-child(2) { width: 40px; }
+            th:nth-child(3) { width: 80px; }
+            th:nth-child(4) { width: 150px; }
+            th:nth-child(6) { width: 80px; }
+            th:nth-child(7) { width: 70px; }
+            
+            td.product-name {
+                max-width: 120px;
             }
         }
         
@@ -910,6 +905,16 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .pagination {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .pagination-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
         }
     </style>
 </head>
@@ -917,7 +922,7 @@
     <!-- Login Page -->
     <div class="login-container" id="loginContainer">
         <div class="login-header">
-            <h1>Posting Tracker</h1>
+            <h1>DAIYU MANAGEMENT</h1>
             <p class="login-subtitle">Monitoring Dashboard</p>
         </div>
         
@@ -929,7 +934,7 @@
             <form class="login-form" id="loginForm">
                 <div class="form-group">
                     <label class="form-label">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
@@ -940,7 +945,7 @@
                 
                 <div class="form-group">
                     <label class="form-label">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                         </svg>
@@ -951,22 +956,20 @@
                 
                 <div class="form-group">
                     <label class="form-label">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                             <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
-                        Peran (Role)
+                        Peran
                     </label>
-                    <div class="role-selector">
-                        <div class="role-option active" data-role="admin">Admin</div>
-                        <div class="role-option" data-role="user">User</div>
+                    <div class="role-selector-compact">
+                        <div class="role-option-compact active" data-role="admin">Admin</div>
+                        <div class="role-option-compact" data-role="user">User</div>
                     </div>
                 </div>
                 
                 <button type="submit" class="login-btn">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
                         <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
                         <polyline points="10 17 15 12 10 7"></polyline>
                         <line x1="15" y1="12" x2="3" y2="12"></line>
@@ -976,8 +979,7 @@
             </form>
             
             <div class="login-footer">
-                <p>Gunakan <strong>admin</strong> / <strong>admin123</strong> untuk masuk sebagai Admin</p>
-                <p style="margin-top: 0.5rem;">Gunakan <strong>user</strong> / <strong>user123</strong> untuk masuk sebagai User</p>
+                <p>Silahkan login menggunakan kredensial yang diberikan</p>
             </div>
         </div>
     </div>
@@ -985,10 +987,10 @@
     <!-- Dashboard Container -->
     <div class="dashboard-container" id="dashboardContainer">
         <div class="container">
-            <!-- Header with Icons -->
+            <!-- Header -->
             <header>
                 <div>
-                    <h1>Posting Tracker</h1>
+                    <h1>DAIYU MANAGEMENT</h1>
                     <p class="subtitle">Monitoring Dashboard</p>
                 </div>
                 <div class="header-right">
@@ -1013,7 +1015,7 @@
                 </div>
             </header>
             
-            <!-- Stats Grid - 2x2 on Mobile -->
+            <!-- Stats Grid -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-label">Total Posts</div>
@@ -1033,7 +1035,7 @@
                 </div>
             </div>
             
-            <!-- Filters with Dropdown Period -->
+            <!-- Filters -->
             <div class="filters">
                 <div class="filters-grid">
                     <div class="filter-group">
@@ -1049,7 +1051,7 @@
                     
                     <div class="filter-group">
                         <span class="filter-label">Status</span>
-                        <select id="statusFilter">
+                        <select id="statusFilter" onchange="applyFilters()">
                             <option value="all">Semua</option>
                             <option value="success">Success</option>
                             <option value="failed">Failed</option>
@@ -1058,7 +1060,7 @@
                     
                     <div class="filter-group">
                         <span class="filter-label">Urutkan</span>
-                        <select id="sortFilter">
+                        <select id="sortFilter" onchange="applyFilters()">
                             <option value="date-desc">Terbaru</option>
                             <option value="date-asc">Terlama</option>
                             <option value="name-asc">Nama A-Z</option>
@@ -1096,7 +1098,7 @@
                             <path d="M21 12h-8"></path>
                             <path d="M16 7l5 5-5 5"></path>
                         </svg>
-                        Reset Semua Data
+                        Reset Semua
                     </button>
                 </div>
             </div>
@@ -1107,10 +1109,10 @@
                     <table id="postsTable">
                         <thead>
                             <tr>
-                                <th style="width: 40px; display: none;" id="checkboxHeader">
+                                <th style="display: none;" id="checkboxHeader">
                                     <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll(this)">
                                 </th>
-                                <th style="width: 50px;">No</th>
+                                <th>No</th>
                                 <th>Tanggal & Jam</th>
                                 <th>Nama Produk</th>
                                 <th>URL Produk</th>
@@ -1154,17 +1156,17 @@
             </div>
             <div class="modal-content">
                 <p style="color: var(--accent-error); margin-bottom: 0.5rem; font-weight: 500;">PERHATIAN!</p>
-                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+                <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
                     Anda akan menghapus <strong>SEMUA DATA</strong> dari database. 
                     Tindakan ini biasanya dilakukan setelah proses pembayaran selesai untuk memulai siklus postingan baru.
                 </p>
-                <p style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px;">
+                <p style="color: var(--text-tertiary); font-size: 0.75rem; margin-top: 1rem; padding: 0.6rem; background: var(--bg-secondary); border-radius: 6px;">
                     Data yang telah dihapus <strong>TIDAK DAPAT</strong> dikembalikan. Pastikan Anda telah melakukan backup jika diperlukan.
                 </p>
             </div>
             <div class="modal-actions">
                 <button class="modal-btn cancel" onclick="hideResetModal()">Batal</button>
-                <button class="modal-btn confirm" onclick="resetAllData()">Ya, Hapus Semua Data</button>
+                <button class="modal-btn confirm" onclick="resetAllData()">Ya, Hapus Semua</button>
             </div>
         </div>
     </div>
@@ -1176,8 +1178,8 @@
         
         // USER CREDENTIALS
         const VALID_USERS = {
-            'admin': { password: 'admin123', role: 'admin', name: 'Boss' },
-            'user': { password: 'user123', role: 'user', name: 'Guest' }
+            'daiyu': { password: 'daiyu114477', role: 'admin', name: 'Admin Daiyu' },
+            'user': { password: 'user123', role: 'user', name: 'Guest User' }
         };
         
         let currentUser = null;
@@ -1190,16 +1192,16 @@
         // ========== LOGIN FUNCTIONS ==========
         document.addEventListener('DOMContentLoaded', function() {
             // Check if user is already logged in
-            const savedUser = localStorage.getItem('postingTrackerUser');
+            const savedUser = localStorage.getItem('daiyuManagementUser');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 showDashboard();
             }
             
             // Role selector functionality
-            document.querySelectorAll('.role-option').forEach(option => {
+            document.querySelectorAll('.role-option-compact').forEach(option => {
                 option.addEventListener('click', function() {
-                    document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('active'));
+                    document.querySelectorAll('.role-option-compact').forEach(opt => opt.classList.remove('active'));
                     this.classList.add('active');
                 });
             });
@@ -1219,9 +1221,9 @@
         });
         
         function handleLogin() {
-            const username = document.getElementById('username').value.trim();
+            const username = document.getElementById('username').value.trim().toLowerCase();
             const password = document.getElementById('password').value;
-            const selectedRole = document.querySelector('.role-option.active').dataset.role;
+            const selectedRole = document.querySelector('.role-option-compact.active').dataset.role;
             
             const errorElement = document.getElementById('loginError');
             
@@ -1238,7 +1240,7 @@
                 
                 // Check if selected role matches user's actual role
                 if (selectedRole !== userRole) {
-                    errorElement.textContent = `Anda login sebagai ${username}, bukan ${selectedRole}`;
+                    errorElement.textContent = `Role yang dipilih tidak sesuai. Gunakan role: ${userRole}`;
                     errorElement.classList.add('show');
                     return;
                 }
@@ -1250,8 +1252,8 @@
                     name: VALID_USERS[username].name
                 };
                 
-                // Save to localStorage
-                localStorage.setItem('postingTrackerUser', JSON.stringify(currentUser));
+                // Save to localStorage (session persistence)
+                localStorage.setItem('daiyuManagementUser', JSON.stringify(currentUser));
                 
                 // Show dashboard
                 showDashboard();
@@ -1286,15 +1288,15 @@
         
         function logout() {
             if (confirm('Apakah Anda yakin ingin logout?')) {
-                localStorage.removeItem('postingTrackerUser');
+                localStorage.removeItem('daiyuManagementUser');
                 currentUser = null;
                 document.getElementById('dashboardContainer').classList.remove('show');
                 document.getElementById('loginContainer').style.display = 'flex';
                 
                 // Reset login form
                 document.getElementById('loginForm').reset();
-                document.querySelector('.role-option').classList.add('active');
-                document.querySelector('.role-option:nth-child(2)').classList.remove('active');
+                document.querySelector('.role-option-compact').classList.add('active');
+                document.querySelectorAll('.role-option-compact')[1].classList.remove('active');
                 document.getElementById('loginError').classList.remove('show');
             }
         }
@@ -1326,9 +1328,9 @@
                                 <div class="empty-icon">⚠️</div>
                                 <h3>Gagal memuat data</h3>
                                 <p style="margin-top: 0.75rem;">${error.message}</p>
-                                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-tertiary);">
-                                    Pastikan Supabase credentials sudah benar dan table product_posts sudah dibuat
-                                </p>
+                                <button onclick="refreshData()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--accent-success); color: var(--bg-primary); border: none; border-radius: 6px; cursor: pointer;">
+                                    Coba Lagi
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -1463,9 +1465,10 @@
                     ? '<span class="status-badge status-success">✓ Success</span>'
                     : '<span class="status-badge status-failed">✗ Failed</span>';
                 
-                const productUrl = post.product_url 
+                // Perbaikan: Cek jika URL produk valid
+                const productUrl = post.product_url && post.product_url !== 'null' && post.product_url.trim() !== ''
                     ? `<a href="${post.product_url}" target="_blank" class="product-url">Lihat</a>`
-                    : '<span class="text-secondary">-</span>';
+                    : '<span class="text-secondary" style="font-size: 0.7rem;">-</span>';
                 
                 const websiteUrl = post.website_url || '-';
                 
@@ -1475,17 +1478,22 @@
                 
                 const rowClass = selectedIds.has(post.id) ? 'selected' : '';
                 
+                // Nama produk dengan truncation dan tooltip
+                const productName = post.product_name || '-';
+                
                 return `
                     <tr class="${rowClass}">
                         ${checkboxCol}
-                        <td class="text-secondary font-mono" style="font-size: 0.6rem;">${(globalIndex + 1).toString().padStart(2, '0')}</td>
+                        <td class="text-secondary font-mono" style="font-size: 0.7rem;">${(globalIndex + 1).toString().padStart(2, '0')}</td>
                         <td>
-                            <div style="font-size: 0.6rem; line-height: 1.3;">${formattedDate}</div>
-                            <div class="text-secondary font-mono" style="font-size: 0.55rem; line-height: 1.2;">${formattedTime}</div>
+                            <div style="font-size: 0.7rem; line-height: 1.3;">${formattedDate}</div>
+                            <div class="text-secondary font-mono" style="font-size: 0.65rem; line-height: 1.2;">${formattedTime}</div>
                         </td>
-                        <td class="product-name" style="font-weight: 500; font-size: 0.65rem;">${post.product_name}</td>
+                        <td class="product-name" data-fullname="${productName.replace(/"/g, '&quot;')}" title="${productName}" style="font-size: 0.7rem;">
+                            ${productName}
+                        </td>
                         <td>${productUrl}</td>
-                        <td class="text-secondary" style="font-size: 0.6rem;">${websiteUrl}</td>
+                        <td class="text-secondary" style="font-size: 0.7rem;">${websiteUrl}</td>
                         <td>${statusBadge}</td>
                     </tr>
                 `;
@@ -1506,31 +1514,48 @@
         }
         
         function toggleSelectAll(checkbox) {
-            const checkboxes = document.querySelectorAll('.row-checkbox');
-            checkboxes.forEach(cb => {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const currentPagePosts = filteredPosts.slice(startIndex, endIndex);
+            
+            if (checkbox.checked) {
+                // Pilih semua di halaman saat ini
+                currentPagePosts.forEach(post => {
+                    selectedIds.add(post.id);
+                });
+            } else {
+                // Hapus semua di halaman saat ini
+                currentPagePosts.forEach(post => {
+                    selectedIds.delete(post.id);
+                });
+            }
+            
+            // Update UI
+            document.querySelectorAll('.row-checkbox').forEach(cb => {
                 cb.checked = checkbox.checked;
-                const id = parseInt(cb.dataset.id);
                 const row = cb.closest('tr');
                 if (checkbox.checked) {
-                    selectedIds.add(id);
                     row.classList.add('selected');
                 } else {
-                    selectedIds.delete(id);
                     row.classList.remove('selected');
                 }
             });
+            
             updateSelectedCount();
         }
         
         function selectAll() {
-            const checkboxes = document.querySelectorAll('.row-checkbox');
-            checkboxes.forEach(cb => {
-                cb.checked = true;
-                const id = parseInt(cb.dataset.id);
-                const row = cb.closest('tr');
-                selectedIds.add(id);
-                row.classList.add('selected');
+            // Pilih semua data yang terfilter
+            filteredPosts.forEach(post => {
+                selectedIds.add(post.id);
             });
+            
+            // Update UI untuk halaman saat ini
+            document.querySelectorAll('.row-checkbox').forEach(cb => {
+                cb.checked = true;
+                cb.closest('tr').classList.add('selected');
+            });
+            
             document.getElementById('selectAllCheckbox').checked = true;
             updateSelectedCount();
         }
@@ -1572,7 +1597,8 @@
                         method: 'DELETE',
                         headers: {
                             'apikey': SUPABASE_KEY,
-                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                            'Authorization': `Bearer ${SUPABASE_KEY}`,
+                            'Prefer': 'return=minimal'
                         }
                     })
                 );
@@ -1591,7 +1617,7 @@
             }
         }
         
-        // Reset all data (Admin only - after payment)
+        // Reset all data
         function showResetAllModal() {
             if (currentUser.role !== 'admin') {
                 alert('Hanya admin yang dapat melakukan reset data');
@@ -1644,10 +1670,6 @@
             `;
             fetchPosts();
         }
-        
-        // Event listeners
-        document.getElementById('statusFilter').addEventListener('change', applyFilters);
-        document.getElementById('sortFilter').addEventListener('change', applyFilters);
         
         // Auto-refresh setiap 30 detik
         setInterval(fetchPosts, 30000);
